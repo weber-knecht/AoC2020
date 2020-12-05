@@ -8,7 +8,7 @@ namespace AoC2020
     {
         static void Main(string[] args)
         {
-            string day = "0";
+            string day = "5";
             if(args != null && args.GetLength(0) > 0) {
                 day = args[0];
             }
@@ -25,6 +25,9 @@ namespace AoC2020
                     break;
                 case "4":
                     RunDay4();
+                    break;
+                case "5":
+                    RunDay5();
                     break;
                 default:
                     Console.WriteLine("Not implemented.");
@@ -68,6 +71,16 @@ namespace AoC2020
             Day4 day4 = new Day4(input);
             int count = day4.Execute();
             Console.WriteLine("Valid Passports: "+count.ToString());
+        }
+
+        public static void RunDay5() {
+            Console.WriteLine("Day5:");
+            List<string> input = ReadFileByLineAsString(".//Day5/input");
+            Day5 day5 = new Day5(input);
+            int highestSeatId = day5.Execute();
+            Console.WriteLine("Highest SeatId: "+ highestSeatId.ToString());
+            int mySeat = day5.MySeat();
+            Console.WriteLine("My Seat: "+ mySeat.ToString());
         }
 
         private static List<int> ReadFileBySeperator(string location, string seperator) {

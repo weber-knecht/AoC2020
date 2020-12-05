@@ -23,6 +23,9 @@ namespace AoC2020
                 case "3":
                     RunDay3();
                     break;
+                case "4":
+                    RunDay4();
+                    break;
                 default:
                     Console.WriteLine("Not implemented.");
                     break;
@@ -59,6 +62,14 @@ namespace AoC2020
             Console.WriteLine(endResult.ToString());
         }
 
+        public static void RunDay4() {
+            Console.WriteLine("Day4:");
+            List<string> input = ReadFileByMultipleLinesAsString(".//Day4/input", "");
+            Day4 day4 = new Day4(input);
+            int count = day4.Execute();
+            Console.WriteLine("Valid Passports: "+count.ToString());
+        }
+
         private static List<int> ReadFileBySeperator(string location, string seperator) {
             List<int> input = new List<int>();
             StreamReader reader = new StreamReader(location);
@@ -90,6 +101,23 @@ namespace AoC2020
                 input.Add(line);               
             }
             return input;
+        }
+
+        private static List<string> ReadFileByMultipleLinesAsString(string location, string seperator) {
+            List<string> input = new List<string>();
+            StreamReader reader = new StreamReader(location);
+            string line = String.Empty;
+            string combinedLine = String.Empty;
+            while((line = reader.ReadLine()) != null) {
+                if(line.Equals(String.Empty)) {
+                    input.Add(combinedLine);
+                    combinedLine = String.Empty;
+                } else {
+                    combinedLine = combinedLine + " " + line;
+                }
+            }
+            input.Add(combinedLine);
+            return input;            
         }
     }
 }

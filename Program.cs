@@ -8,7 +8,7 @@ namespace AoC2020
     {
         static void Main(string[] args)
         {
-            string day = "7";
+            string day = "0";
             if(args != null && args.GetLength(0) > 0) {
                 day = args[0];
             }
@@ -35,6 +35,9 @@ namespace AoC2020
                 case "7":
                     RunDay7();
                     break;                    
+                case "8":
+                    RunDay8();
+                    break;                        
                 default:
                     Console.WriteLine("Not implemented.");
                     break;
@@ -107,6 +110,15 @@ namespace AoC2020
             int count = day7.ExecutePart2("shiny gold bag");
             Console.WriteLine("Bags required inside my bag: "+count.ToString());
 
+        }
+
+        public static void RunDay8() {
+            Console.WriteLine("Day8: ");
+            List<string> input = ReadFileByLineAsString(".//Day8/input");
+            Day8 day8 = new Day8(input);   
+            int value = day8.Execute(); 
+            //Console.WriteLine("Accumulator value before any second execution: "+value.ToString());
+            Console.WriteLine("Accumulator after program terminates: "+value.ToString());
         }
 
         private static List<int> ReadFileBySeperator(string location, string seperator) {

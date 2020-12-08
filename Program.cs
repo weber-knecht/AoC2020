@@ -8,7 +8,7 @@ namespace AoC2020
     {
         static void Main(string[] args)
         {
-            string day = "0";
+            string day = "7";
             if(args != null && args.GetLength(0) > 0) {
                 day = args[0];
             }
@@ -32,6 +32,9 @@ namespace AoC2020
                 case "6":
                     RunDay6();
                     break;
+                case "7":
+                    RunDay7();
+                    break;                    
                 default:
                     Console.WriteLine("Not implemented.");
                     break;
@@ -92,6 +95,17 @@ namespace AoC2020
             Day6 day6 = new Day6(input);
             int count = day6.Execute();
             Console.WriteLine("Sum of questions answered yes: "+count.ToString());
+        }
+
+        public static void RunDay7() {
+            Console.WriteLine("Day7: ");
+            List<string> input = ReadFileByLineAsString(".//Day7/input");
+            Day7 day7 = new Day7(input);
+            //day7.Execute("shiny gold bag");
+            //int count = day7.foundBagColors.Count;
+            //Console.WriteLine("No of Bag Colors that can contain one shine gold bag: "+ count.ToString());
+            int count = day7.ExecutePart2("shiny gold bag");
+            Console.WriteLine("Bags required inside my bag: "+count.ToString());
 
         }
 

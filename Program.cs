@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.IO;
 using System.Collections.Generic;
 
@@ -6,6 +7,7 @@ namespace AoC2020
 {
     class Program
     {
+        private static Stopwatch sw;
         static void Main(string[] args)
         {
             string day = "0";
@@ -37,7 +39,10 @@ namespace AoC2020
                     break;                    
                 case "8":
                     RunDay8();
-                    break;                        
+                    break;
+                case "9":
+                    RunDay9();
+                    break;                                               
                 default:
                     Console.WriteLine("Not implemented.");
                     break;
@@ -101,15 +106,27 @@ namespace AoC2020
         }
 
         public static void RunDay7() {
+            sw = new Stopwatch();
+
             Console.WriteLine("Day7: ");
             List<string> input = ReadFileByLineAsString(".//Day7/input");
             Day7 day7 = new Day7(input);
-            //day7.Execute("shiny gold bag");
-            //int count = day7.foundBagColors.Count;
-            //Console.WriteLine("No of Bag Colors that can contain one shine gold bag: "+ count.ToString());
-            int count = day7.ExecutePart2("shiny gold bag");
-            Console.WriteLine("Bags required inside my bag: "+count.ToString());
 
+            sw.Start();
+            day7.Execute("shiny gold bag");
+            sw.Stop();
+            Console.WriteLine("RunTime: " + ParseTimeSpan(sw.Elapsed));
+
+            int count = day7.foundBagColors.Count;
+            Console.WriteLine("No of Bag Colors that can contain one shine gold bag: "+ count.ToString());
+
+            sw = new Stopwatch();
+            sw.Start();
+            int countPart2 = day7.ExecutePart2("shiny gold bag");
+            sw.Stop();
+            Console.WriteLine("RunTime: " + ParseTimeSpan(sw.Elapsed));
+
+            Console.WriteLine("Bags required inside my bag: "+countPart2.ToString());
         }
 
         public static void RunDay8() {
@@ -119,6 +136,31 @@ namespace AoC2020
             int value = day8.Execute(); 
             //Console.WriteLine("Accumulator value before any second execution: "+value.ToString());
             Console.WriteLine("Accumulator after program terminates: "+value.ToString());
+        }
+
+        public static void RunDay9() {
+            sw = new Stopwatch();
+            Console.WriteLine("Day9:");
+            List<Int64> input = ReadFileByLineAsInt64(".//Day9/input");
+            sw.Start();
+            Day9 day9 = new Day9(input);
+            Int64 result = day9.Execute(25);
+            sw.Stop();
+            Console.WriteLine("RunTime: " + ParseTimeSpan(sw.Elapsed));
+            Console.WriteLine("First number that doesn't sum to 2 pervious numbers: "+result.ToString());
+
+            sw = new Stopwatch();
+            sw.Start();
+            Int64 weakness = day9.FindWeakness(result);
+            sw.Stop();
+            Console.WriteLine("RunTime: " + ParseTimeSpan(sw.Elapsed));
+            Console.WriteLine("Encryption weakness: "+ weakness.ToString());
+        }
+
+        private static string ParseTimeSpan(TimeSpan ts)
+        {
+            return String.Format("{0:0} ms",
+                                    ts.Milliseconds);
         }
 
         private static List<int> ReadFileBySeperator(string location, string seperator) {
@@ -140,6 +182,16 @@ namespace AoC2020
             string line = String.Empty;
             while((line = reader.ReadLine()) != null) {
                 input.Add(int.Parse(line));               
+            }
+            return input;
+        }
+
+        private static List<Int64> ReadFileByLineAsInt64(string location) {
+            List<Int64> input = new List<Int64>();
+            StreamReader reader = new StreamReader(location);
+            string line = String.Empty;
+            while((line = reader.ReadLine()) != null) {
+                input.Add(Int64.Parse(line));               
             }
             return input;
         }

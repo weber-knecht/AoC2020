@@ -42,6 +42,9 @@ namespace AoC2020
                     break;
                 case "9":
                     RunDay9();
+                    break;
+                case "10":
+                    RunDay10();
                     break;                                               
                 default:
                     Console.WriteLine("Not implemented.");
@@ -155,6 +158,26 @@ namespace AoC2020
             sw.Stop();
             Console.WriteLine("RunTime: " + ParseTimeSpan(sw.Elapsed));
             Console.WriteLine("Encryption weakness: "+ weakness.ToString());
+        }
+
+        private static void RunDay10()
+        {
+            sw = new Stopwatch();
+            Console.WriteLine("Day10:");
+            List<int> input = ReadFileByLineAsInt(".//Day10/input");
+            sw.Start();
+            Day10 day10 = new Day10(input);
+            int result = day10.Execute(0);
+            sw.Stop();
+            Console.WriteLine("1-jolt diff * 3-jolt diff = "+result.ToString());
+            Console.WriteLine("RunTime: " + ParseTimeSpan(sw.Elapsed));
+            
+            sw = new Stopwatch();
+            sw.Start();
+            long distArr = day10.FindAllDistinctArrangements();
+            sw.Stop();
+            Console.WriteLine("Distinct Arrangements: "+ distArr.ToString());            
+            Console.WriteLine("RunTime: " + ParseTimeSpan(sw.Elapsed));
         }
 
         private static string ParseTimeSpan(TimeSpan ts)

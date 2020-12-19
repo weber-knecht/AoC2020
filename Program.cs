@@ -10,7 +10,7 @@ namespace AoC2020
         private static Stopwatch sw;
         static void Main(string[] args)
         {
-            string day = "11";
+            string day = "0";
             if(args != null && args.GetLength(0) > 0) {
                 day = args[0];
             }
@@ -48,7 +48,10 @@ namespace AoC2020
                     break;                                               
                 case "11":
                     RunDay11();
-                    break;                                               
+                    break;
+                case "12":
+                    RunDay12();
+                    break;                                                
                 default:
                     Console.WriteLine("Not implemented.");
                     break;
@@ -203,6 +206,26 @@ namespace AoC2020
             Console.WriteLine("Seats occupied: "+result.ToString());
             Console.WriteLine("RunTime: " + ParseTimeSpan(sw.Elapsed));
         }
+        private static void RunDay12()
+        {
+            sw = new Stopwatch();
+            Console.WriteLine("Day12:");
+            List<string> input = ReadFileByLineAsString(".//Day12/input");
+            sw.Start();
+            Day12 day12 = new Day12(input);
+            int result = day12.ExecutePart1();
+            sw.Stop();
+            Console.WriteLine("Manhatten distance: "+result.ToString());
+            Console.WriteLine("RunTime: " + ParseTimeSpan(sw.Elapsed));
+            
+            sw = new Stopwatch();
+            sw.Start();
+            day12 = new Day12(input);
+            result = day12.ExecutePart2();
+            sw.Stop();
+            Console.WriteLine("Manhatten distance part2: "+result.ToString());
+            Console.WriteLine("RunTime: " + ParseTimeSpan(sw.Elapsed));
+        }        
 
         private static string ParseTimeSpan(TimeSpan ts)
         {

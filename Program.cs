@@ -52,6 +52,9 @@ namespace AoC2020
                 case "12":
                     RunDay12();
                     break;                                                
+                case "13":
+                    RunDay13();
+                    break;  
                 default:
                     Console.WriteLine("Not implemented.");
                     break;
@@ -206,6 +209,7 @@ namespace AoC2020
             Console.WriteLine("Seats occupied: "+result.ToString());
             Console.WriteLine("RunTime: " + ParseTimeSpan(sw.Elapsed));
         }
+
         private static void RunDay12()
         {
             sw = new Stopwatch();
@@ -225,12 +229,31 @@ namespace AoC2020
             sw.Stop();
             Console.WriteLine("Manhatten distance part2: "+result.ToString());
             Console.WriteLine("RunTime: " + ParseTimeSpan(sw.Elapsed));
-        }        
+        } 
+
+        private static void RunDay13() {
+            sw = new Stopwatch();
+            Console.WriteLine("Day13:");
+            List<string> input = ReadFileByLineAsString(".//Day13/input");
+            sw.Start();
+            Day13 day13 = new Day13(input);
+            int result = day13.ExecutePart1();
+            sw.Stop();
+            Console.WriteLine("Result Part1: "+result.ToString());
+            Console.WriteLine("RunTime: " + ParseTimeSpan(sw.Elapsed));
+
+            sw.Start();
+            day13 = new Day13(input);
+            long result2 = day13.ExecutePart2();
+            sw.Stop();
+            Console.WriteLine("Result Part2: "+result2.ToString());
+            Console.WriteLine("RunTime: " + ParseTimeSpan(sw.Elapsed));
+        }       
 
         private static string ParseTimeSpan(TimeSpan ts)
         {
             return String.Format("{0:0} ms",
-                                    ts.Milliseconds);
+                                    ts.TotalMilliseconds);
         }
 
         private static List<int> ReadFileBySeperator(string location, string seperator) {
